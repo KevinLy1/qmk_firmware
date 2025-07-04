@@ -3,6 +3,22 @@
 
 #include QMK_KEYBOARD_H
 
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    if(keycode == RGUI_T(KC_LEFT) || keycode == RCTL_T(KC_RGHT)) {
+        return false;
+    }
+
+    return true;
+}
+
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    if(keycode == RGUI_T(KC_LEFT) || keycode == RCTL_T(KC_RGHT)) {
+        return false;
+    }
+
+    return true;
+}
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
@@ -58,4 +74,3 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [3] = { ENCODER_CCW_CW(RM_HUED, RM_HUEU) }
 };
 #endif
-
