@@ -98,6 +98,9 @@ bool rgb_matrix_indicators_kb(void) {
     if (host_keyboard_led_state().caps_lock) {
         rgb_matrix_set_color(40, 0xFF, 0xFF, 0xFF);
     }
+        if (host_keyboard_led_state().scroll_lock) {
+        rgb_matrix_set_color(21, 0xFF, 0xFF, 0xFF);
+    }
     return true;
 }
 #endif
