@@ -38,17 +38,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 #ifdef RGBLIGHT_ENABLE
-const rgblight_segment_t PROGMEM scrolllock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 7, HSV_RED}
-);
-
-const rgblight_segment_t PROGMEM capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+const rgblight_segment_t PROGMEM caps_lock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 7, HSV_WHITE}
 );
 
+const rgblight_segment_t PROGMEM scroll_lock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 7, HSV_RED}
+);
+
+const rgblight_segment_t PROGMEM caps_and_scroll_lock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 7, HSV_ORANGE}
+);
+
 const rgblight_segment_t* const PROGMEM rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    scrolllock_layer,
-    capslock_layer
+    caps_lock_layer,
+    scroll_lock_layer,
+    caps_and_scroll_lock_layer
     
 );
 
@@ -57,8 +62,9 @@ void keyboard_post_init_user(void) {
 }
 
 bool led_update_user(led_t led_state) {
-    rgblight_set_layer_state(0, led_state.scroll_lock);
-    rgblight_set_layer_state(1, led_state.caps_lock);
+    rgblight_set_layer_state(0, led_state.caps_lock);
+    rgblight_set_layer_state(1, led_state.scroll_lock);
+    rgblight_set_layer_state(2, led_state.caps_lock && led_state.scroll_lock);
     return true;
 }
 #endif
